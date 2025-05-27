@@ -34,7 +34,9 @@ public class track {
     public int getRate(){
         return rate;
     }
-
+     public void setRate(int rate) {
+        this.rate = rate;
+    }
     public String formatarEmTexto() {
         return "Faixa: " + faixa + ", Álbum: " + album + ", Artista: " + artista + ", Ano: " + ano + "Nota: " + rate;
     }
