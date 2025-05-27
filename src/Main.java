@@ -46,6 +46,24 @@ public class Main {
     switch (opcao) {
 
             case 1:
+            TrackUtils.cadastrarMusica(sc, tracks);
+            break;
+
+            case 2:
+            TrackUtils.cadastrarAlbum(sc, tracks);
+            break;
+
+            case 3:
+            TrackUtils.listarMusicas(tracks);
+            break;
+
+            case 4:
+            TrackUtils.listarAlbuns(tracks);
+            break;
+
+            case 5:
+            TrackUtils.avaliarTrack(sc, tracks);
+            break;
 
             case 6: // exporta as listas 
             save.writeArquivo(nome); 
