@@ -18,7 +18,7 @@ public class save {
                 File file = cFile();
                 try (FileWriter writer = new FileWriter(file, true)) {
                     writer.write(texto + "\n");
-                    System.out.println("Conteudo escrito no arquivo" + texto);
+                    System.out.println("Conteudo escrito no arquivo: " + "\"" + texto + "\"");
                 } catch (IOException e) {{
                     System.out.println("Erro ao escrever no arquivo" + e.getMessage());
                 }}
