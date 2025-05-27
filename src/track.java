@@ -34,4 +34,8 @@ public class track {
     public int getRate(){
         return rate;
     }
+
+    public String formatarEmTexto() {
+        return "Faixa: " + faixa + ", Álbum: " + album + ", Artista: " + artista + ", Ano: " + ano + "Nota: " + rate;
+    }
 }
