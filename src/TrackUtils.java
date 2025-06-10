@@ -59,4 +59,25 @@ public class TrackUtils {
             }
         }
     }
+    
+    public static void cadastrarAlbum(Scanner sc, ArrayList<track> tracks) {
+        System.out.print("Digite o nome do álbum: ");
+        String album = sc.nextLine();
+        System.out.print("Digite o nome do artista: ");
+        String artista = sc.nextLine();
+        System.out.print("Digite o ano de lançamento: ");
+        int ano = Integer.parseInt(sc.nextLine());
+        tracks.add(new track(null, artista, album, ano, 0));
+        System.out.println("Álbum cadastrado com sucesso!");
+    }
+
+    // Método para listar todos os álbuns cadastrados
+    public static void listarAlbuns(ArrayList<track> tracks) {
+        System.out.println("\n--- Álbuns Cadastrados ---");
+        for (track t : tracks) {
+            if (t.getFaixa() == null) { // Verifica se é um álbum sem faixa específica
+                System.out.println("Álbum: " + t.getAlbum() + ", Artista: " + t.getArtista() + ", Ano: " + t.getAno());
+            }
+        }
+    }
 }
