@@ -2,8 +2,11 @@ package src;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Calendar;
 
 public class TrackUtils {
+
+        
 
     public static void cadastrarMusica(Scanner sc, ArrayList<track> tracks) {
         System.out.print("Digite o nome da música: ");
@@ -14,7 +17,12 @@ public class TrackUtils {
         String album = sc.nextLine();
         System.out.print("Digite o ano de lançamento: ");
         int ano = Integer.parseInt(sc.nextLine());
-        tracks.add(new track(faixa, artista, album, ano, 0));
+        System.out.print("Digite a nota: ");
+        int rate = Integer.parseInt(sc.nextLine());
+
+        Calendar registrationDate = Calendar.getInstance();  // pega a data do cadastro da musica
+
+        tracks.add(new track(faixa, artista, album, ano, rate, dateString));
         System.out.println("Música cadastrada com sucesso!");
     }
 
@@ -67,7 +75,12 @@ public class TrackUtils {
         String artista = sc.nextLine();
         System.out.print("Digite o ano de lançamento: ");
         int ano = Integer.parseInt(sc.nextLine());
-        tracks.add(new track(null, artista, album, ano, 0));
+        System.out.print("Digite a nota: ");
+        int rate = Integer.parseInt(sc.nextLine());
+
+        Calendar registrationDate = Calendar.getInstance(); 
+
+        tracks.add(new track(null, artista, album, ano, rate, registrationDate));
         System.out.println("Álbum cadastrado com sucesso!");
     }
 

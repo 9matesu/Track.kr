@@ -32,6 +32,7 @@ public class Main {
 
         int opcao;
 
+        do {
             System.out.println("\n--- MENU ---");
                 System.out.println("1. Cadastrar música");
                 System.out.println("2. Cadastrar álbum");
@@ -43,15 +44,13 @@ public class Main {
                 System.out.println();
                 opcao = Integer.parseInt(sc.nextLine());
 
+        
     switch (opcao) {
 
             case 1:
             TrackUtils.cadastrarMusica(sc, tracks);
-
-            
-            TrackUtils.cadastrarMusica(sc, tracks);
             break;
-
+            
             case 2:
             TrackUtils.cadastrarAlbum(sc, tracks);
             break;
@@ -69,13 +68,25 @@ public class Main {
             break;
 
             case 6: // exporta as listas 
-            
-            save.writeArquivo(); 
+
+             StringBuilder sb = new StringBuilder();
+
+            for (track t : tracks) {
+            sb.append(t.formatarEmTexto()).append("\n");
+            }
+
+            String texto = sb.toString();
+            save.writeArquivo(texto);
+
+            break;
 
             case 0:
+            System.out.println("Programa encerrando...");
             System.exit(0);
+
+        } 
             
-    }
+    } while (opcao != 0);
 
 
 
