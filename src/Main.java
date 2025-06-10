@@ -46,9 +46,12 @@ public class Main {
     switch (opcao) {
 
             case 1:
+            TrackUtils.cadastrarMusica(sc, tracks);
 
+            
             case 6: // exporta as listas 
-            save.writeArquivo(nome); 
+            
+            save.writeArquivo(); 
 
             case 0:
             System.exit(0);
