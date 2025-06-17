@@ -2,7 +2,6 @@ package src;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Calendar;
 
 public class TrackUtils {
 
@@ -20,9 +19,7 @@ public class TrackUtils {
         System.out.print("Digite a nota: ");
         int rate = Integer.parseInt(sc.nextLine());
 
-        Calendar registrationDate = Calendar.getInstance();  // pega a data do cadastro da musica
-
-        tracks.add(new track(faixa, artista, album, ano, rate, dateString));
+        tracks.add(new track(faixa, artista, album, ano, rate));
         System.out.println("Música cadastrada com sucesso!");
     }
 
@@ -33,31 +30,6 @@ public class TrackUtils {
         }
     }
 
-    public static void avaliarTrack(Scanner sc, ArrayList<track> tracks) {
-        System.out.print("Digite o nome da música ou álbum para avaliar: ");
-        String nome = sc.nextLine();
-        track t = null;
-        for (track track : tracks) {
-            if (track.getFaixa().equalsIgnoreCase(nome) || track.getAlbum().equalsIgnoreCase(nome)) {
-                t = track;
-                break;
-            }
-        }
-        if (t != null) {
-            double avaliacao;
-            do {
-                System.out.print("Digite a avaliação (0 a 10): ");
-                avaliacao = Double.parseDouble(sc.nextLine());
-                if (avaliacao < 0 || avaliacao > 10) {
-                    System.out.println("Nota inválida! Por favor, insira uma nota entre 0 e 10.");
-                }
-            } while (avaliacao < 0 || avaliacao > 10);
-            t.setRate((int) avaliacao);
-            System.out.println("Avaliação registrada com sucesso!");
-        } else {
-            System.out.println("Música ou álbum não encontrado!");
-        }
-    }
 
     public static void historicoAvaliacoes(ArrayList<track> tracks) {
         System.out.println("\n--- Histórico de Avaliações ---");
@@ -78,9 +50,7 @@ public class TrackUtils {
         System.out.print("Digite a nota: ");
         int rate = Integer.parseInt(sc.nextLine());
 
-        Calendar registrationDate = Calendar.getInstance(); 
-
-        tracks.add(new track(null, artista, album, ano, rate, registrationDate));
+        tracks.add(new track(null, artista, album, ano, rate));
         System.out.println("Álbum cadastrado com sucesso!");
     }
 

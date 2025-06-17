@@ -64,7 +64,6 @@ public class Main {
             break;
 
             case 5:
-            TrackUtils.avaliarTrack(sc, tracks);
             break;
 
             case 6: // exporta as listas 
