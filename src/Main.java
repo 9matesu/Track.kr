@@ -35,11 +35,9 @@ public class Main {
         do {
             System.out.println("\n--- MENU ---");
                 System.out.println("1. Cadastrar música");
-                System.out.println("2. Cadastrar álbum");
-                System.out.println("3. Listar músicas");
-                System.out.println("4. Listar álbuns");
-                System.out.println("5. Ver histórico de avaliações");
-                System.out.println("6. Exportar lista");
+                System.out.println("2. Listar músicas");
+                System.out.println("3. Ver histórico de avaliações");
+                System.out.println("4. Exportar lista");
                 System.out.println("0. Sair");
                 System.out.println();
                 opcao = Integer.parseInt(sc.nextLine());
@@ -50,23 +48,15 @@ public class Main {
             case 1:
             TrackUtils.cadastrarMusica(sc, tracks);
             break;
-            
-            case 2:
-            TrackUtils.cadastrarAlbum(sc, tracks);
-            break;
 
-            case 3:
+            case 2:
             TrackUtils.listarMusicas(tracks);
             break;
 
-            case 4:
-            TrackUtils.listarAlbuns(tracks);
+            case 3: // historico avaliaçao
             break;
 
-            case 5:
-            break;
-
-            case 6: // exporta as listas 
+            case 4: // exporta as listas 
 
              StringBuilder sb = new StringBuilder();
 
