@@ -1,9 +1,11 @@
 package src;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import javax.swing.*;
 
 public class MainGui {
+    private static ArrayList<Track> listaTracks = new ArrayList<>();
     public static void main(String[] args) {
         JFrame frame = new JFrame("Track.kr");
         frame.setLayout(new FlowLayout());
