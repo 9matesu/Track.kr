@@ -1,12 +1,16 @@
 package src;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 
 public class MainGui {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Track.kr");
         frame.setLayout(new FlowLayout());
+
+        ArrayList<track> listaDeMusicas = new ArrayList<>(); // setar escopo para salvar e mostrar as músicas
 
 
         // botões
@@ -42,16 +46,19 @@ public class MainGui {
         JTextField tf_nota = new JTextField();
 
         JButton b_salvar = new JButton("   Salvar");
-
         b_salvar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Aqui você pode tratar os dados, salvar, validar etc.
+
                 String nome = tf_nome.getText();
                 String artista = tf_artista.getText();
                 String album = tf_album.getText();
-                String ano = tf_ano.getText();
-                String nota = tf_nota.getText();
+                int ano = Integer.parseInt(tf_ano.getText());
+                int nota = Integer.parseInt(tf_nota.getText());
+
+                track novaTrack = new track(nome, artista, album, ano, nota);
+                listaDeMusicas.add(novaTrack);
+                
 
                 JOptionPane.showMessageDialog(F_cadastrarmusica,
                     "Música cadastrada:\n" +
@@ -104,6 +111,20 @@ public class MainGui {
                 F_listarMusica.setLocationRelativeTo(null);
                 F_listarMusica.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // só fecha a janela nova
                 F_listarMusica.setVisible(true);
+
+                StringBuilder sb = new StringBuilder();
+                for (track musica : listaDeMusicas) {
+                sb.append(musica.formatarEmTexto());
+                sb.append("\n\n");  // separa as músicas com linhas em branco
+                }
+                String resultado = sb.toString(); // função que puxa as tracks e adiciona numa string
+
+                JLabel campoListar = new JLabel("<html>" + resultado.replace("\n", "<br>") + "</html>");
+                JScrollPane scroll = new JScrollPane(campoListar);
+                scroll.setPreferredSize(new Dimension(280, 360));
+
+                F_listarMusica.add(campoListar);
+
 
             }
 
