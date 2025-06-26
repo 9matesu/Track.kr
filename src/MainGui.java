@@ -17,19 +17,77 @@ public class MainGui {
         // botao abre janela
         b_cadastrarMusica.addActionListener(new ActionListener() {
 
-           @Override 
-            public void actionPerformed (ActionEvent e) {
-                JFrame F_cadastrarmusica = new JFrame("Cadastrar Música");
-                F_cadastrarmusica.setSize(new Dimension(300,400));
-                F_cadastrarmusica.setLocationRelativeTo(null);
-                F_cadastrarmusica.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // só fecha a janela nova
-                F_cadastrarmusica.setVisible(true);
-                F_cadastrarmusica.setLocation(300, 100);
-                
+    @Override 
+    public void actionPerformed (ActionEvent e) {
+        JFrame F_cadastrarmusica = new JFrame("Cadastrar Música");
+        F_cadastrarmusica.setSize(new Dimension(350, 300));
+        F_cadastrarmusica.setLayout(new GridLayout(6, 2, 5, 5));
+        F_cadastrarmusica.setLocationRelativeTo(null);
+        F_cadastrarmusica.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+        // Campos de entrada
+        JLabel l_nome = new JLabel("   Nome:");
+        JTextField tf_nome = new JTextField();
+
+        JLabel l_artista = new JLabel("   Artista:");
+        JTextField tf_artista = new JTextField();
+
+        JLabel l_album = new JLabel("   Álbum:");
+        JTextField tf_album = new JTextField();
+
+        JLabel l_ano = new JLabel("   Ano:");
+        JTextField tf_ano = new JTextField();
+
+        JLabel l_nota = new JLabel("   Nota:");
+        JTextField tf_nota = new JTextField();
+
+        JButton b_salvar = new JButton("   Salvar");
+
+        b_salvar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Aqui você pode tratar os dados, salvar, validar etc.
+                String nome = tf_nome.getText();
+                String artista = tf_artista.getText();
+                String album = tf_album.getText();
+                String ano = tf_ano.getText();
+                String nota = tf_nota.getText();
+
+                JOptionPane.showMessageDialog(F_cadastrarmusica,
+                    "Música cadastrada:\n" +
+                    "Nome: " + nome + "\n" +
+                    "Artista: " + artista + "\n" +
+                    "Álbum: " + album + "\n" +
+                    "Ano: " + ano + "\n" +
+                    "Nota: " + nota
+                );
+
+                // Você pode adicionar a lógica para gravar isso em uma lista ou arquivo
             }
-
         });
+
+        // Adicionando os componentes ao frame
+        F_cadastrarmusica.add(l_nome);
+        F_cadastrarmusica.add(tf_nome);
+
+        F_cadastrarmusica.add(l_artista);
+        F_cadastrarmusica.add(tf_artista);
+
+        F_cadastrarmusica.add(l_album);
+        F_cadastrarmusica.add(tf_album);
+
+        F_cadastrarmusica.add(l_ano);
+        F_cadastrarmusica.add(tf_ano);
+
+        F_cadastrarmusica.add(l_nota);
+        F_cadastrarmusica.add(tf_nota);
+
+        F_cadastrarmusica.add(new JLabel()); // espaço vazio
+        F_cadastrarmusica.add(b_salvar);
+
+        F_cadastrarmusica.setVisible(true);
+    }
+});
 
 
         JButton b_listarMusica = new JButton("Listar Músicas");
