@@ -39,7 +39,7 @@ public class track {
     }
     
     public String formatarEmTexto() {
-        return "Faixa: " + faixa + "\nÁlbum: " + album + "\nArtista: " + artista + "\nAno: " + ano + "\nNota: 1" + rate;
+        return "Faixa: " + faixa + "\nArtista: " + artista + "\nAlbum: " + album + "\nAno: " + ano + "\nNota: " + rate;
     }
 
 }
