@@ -2,7 +2,7 @@ package src;
 
 // declara variáveis para uso em vetores dentro de main
 
-public class Track {
+public class track {
     private String faixa;
     private String artista;
     private String album;
@@ -10,7 +10,7 @@ public class Track {
     private int rate;
 
     // inicializa as variáveis para uso
-    public Track(String faixa, String artista, String album, int ano, int rate) {
+    public track(String faixa, String artista, String album, int ano, int rate) {
         this.faixa = faixa;
         this.artista = artista;
         this.album = album;
