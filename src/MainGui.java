@@ -1,20 +1,33 @@
 package src;
 import java.awt.*;
 import javax.swing.*;
-
+import javax.swing.border.EmptyBorder;
 
 public class MainGui {
 
     static java.util.List<track> historico = new java.util.ArrayList<>();
 
     public static void main(String[] args) {
-    
+
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ignored) {}
+
+        Color fundo = new Color(46, 46, 46);         // #2E2E2E
+        Color painel = new Color(60, 60, 60);        // #3C3C3C
+        Color fundobotao = new Color(60, 60, 60);        //rgb(94, 133, 177)
+        Color texto = new Color(224, 224, 224);      // #E0E0E0
+        Color input = new Color(68, 68, 68);         // #444
+        Font fonte = new Font("Segoe UI", Font.PLAIN, 14);
+        Font fonteBotao = new Font("Segoe UI", Font.BOLD, 14);
+
         JFrame frame = new JFrame("Track.kr");
         frame.setLayout(new BorderLayout(10, 10));
+        frame.getContentPane().setBackground(fundo);
 
-        JPanel painelImagem = new JPanel();
-        painelImagem.setPreferredSize(new Dimension(600, 200));
-        painelImagem.setLayout(new BorderLayout());
+        JPanel painelImagem = new JPanel(new BorderLayout());
+        painelImagem.setPreferredSize(new Dimension(600, 180));
+        painelImagem.setBackground(fundo);
 
         ImageIcon imagem = new ImageIcon("src/main.png");
         JLabel labelImagem = new JLabel(imagem);
@@ -23,17 +36,29 @@ public class MainGui {
 
         frame.add(painelImagem, BorderLayout.NORTH);
 
+        // Painel de botões
         JPanel painelBotoes = new JPanel(new GridLayout(3, 1, 10, 10));
         painelBotoes.setPreferredSize(new Dimension(600, 180));
+        painelBotoes.setBackground(fundo);
+        painelBotoes.setBorder(new EmptyBorder(10, 20, 10, 20));
 
+        // Botões
         JButton b_cadastrarMusica = new JButton("Cadastrar Música");
         JButton b_historico = new JButton("Histórico de Avaliações");
         JButton b_exportar = new JButton("Exportar Lista");
 
+        JButton[] botoes = { b_cadastrarMusica, b_historico, b_exportar };
+        for (JButton botao : botoes) {
+            botao.setBackground(fundobotao);
+            botao.setForeground(fundobotao);
+            botao.setFont(fonteBotao);
+            botao.setFocusPainted(false);
+            botao.setBorder(BorderFactory.createEmptyBorder(12, 20, 12, 20));
+        }
+
         painelBotoes.add(b_cadastrarMusica);
         painelBotoes.add(b_historico);
         painelBotoes.add(b_exportar);
-
         frame.add(painelBotoes, BorderLayout.CENTER);
 
         b_cadastrarMusica.addActionListener(e -> {
@@ -43,30 +68,40 @@ public class MainGui {
             F_cadastrarmusica.setLocationRelativeTo(null);
             F_cadastrarmusica.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-            JLabel l_nome = new JLabel("   Nome:");
-            JTextField tf_nome = new JTextField();
+            JPanel panel = (JPanel) F_cadastrarmusica.getContentPane();
+            panel.setBackground(fundo);
+            panel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-            JLabel l_artista = new JLabel("   Artista:");
-            JTextField tf_artista = new JTextField();
+            String[] labelsText = { "Nome:", "Artista:", "Álbum:", "Ano:", "Nota:" };
+            JLabel[] labels = new JLabel[5];
+            JTextField[] fields = new JTextField[5];
 
-            JLabel l_album = new JLabel("   Álbum:");
-            JTextField tf_album = new JTextField();
+            for (int i = 0; i < 5; i++) {
+                labels[i] = new JLabel("  " + labelsText[i]);
+                labels[i].setForeground(texto);
+                labels[i].setFont(fonte);
+                fields[i] = new JTextField();
+                fields[i].setBackground(input);
+                fields[i].setForeground(texto);
+                fields[i].setCaretColor(texto);
+                fields[i].setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+                F_cadastrarmusica.add(labels[i]);
+                F_cadastrarmusica.add(fields[i]);
+            }
 
-            JLabel l_ano = new JLabel("   Ano:");
-            JTextField tf_ano = new JTextField();
-
-            JLabel l_nota = new JLabel("   Nota:");
-            JTextField tf_nota = new JTextField();
-
-            JButton b_salvar = new JButton("   Salvar");
+            JButton b_salvar = new JButton("Salvar");
+            b_salvar.setBackground(painel);
+            b_salvar.setForeground(fundo);
+            b_salvar.setFont(fonteBotao);
+            b_salvar.setFocusPainted(false);
 
             b_salvar.addActionListener(ev -> {
                 try {
-                    String nome = tf_nome.getText();
-                    String artista = tf_artista.getText();
-                    String album = tf_album.getText();
-                    int ano = Integer.parseInt(tf_ano.getText());
-                    int nota = Integer.parseInt(tf_nota.getText());
+                    String nome = fields[0].getText();
+                    String artista = fields[1].getText();
+                    String album = fields[2].getText();
+                    int ano = Integer.parseInt(fields[3].getText());
+                    int nota = Integer.parseInt(fields[4].getText());
 
                     track novaTrack = new track(nome, album, artista, ano, nota);
                     historico.add(novaTrack);
@@ -77,7 +112,9 @@ public class MainGui {
                                     "Artista: " + artista + "\n" +
                                     "Álbum: " + album + "\n" +
                                     "Ano: " + ano + "\n" +
-                                    "Nota: " + nota
+                                    "Nota: " + nota,
+                            "Sucesso",
+                            JOptionPane.INFORMATION_MESSAGE
                     );
                     F_cadastrarmusica.dispose();
 
@@ -85,21 +122,6 @@ public class MainGui {
                     JOptionPane.showMessageDialog(F_cadastrarmusica, "Ano e Nota devem ser números inteiros.");
                 }
             });
-
-            F_cadastrarmusica.add(l_nome);
-            F_cadastrarmusica.add(tf_nome);
-
-            F_cadastrarmusica.add(l_artista);
-            F_cadastrarmusica.add(tf_artista);
-
-            F_cadastrarmusica.add(l_album);
-            F_cadastrarmusica.add(tf_album);
-
-            F_cadastrarmusica.add(l_ano);
-            F_cadastrarmusica.add(tf_ano);
-
-            F_cadastrarmusica.add(l_nota);
-            F_cadastrarmusica.add(tf_nota);
 
             F_cadastrarmusica.add(new JLabel());
             F_cadastrarmusica.add(b_salvar);
@@ -109,29 +131,36 @@ public class MainGui {
 
         b_historico.addActionListener(e -> {
             JFrame F_historico = new JFrame("Histórico de Avaliações");
-            F_historico.setSize(new Dimension(300, 400));
+            F_historico.setSize(new Dimension(350, 400));
             F_historico.setLocationRelativeTo(null);
             F_historico.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
             JLabel Hist = new JLabel();
             Hist.setVerticalAlignment(SwingConstants.TOP);
             Hist.setHorizontalAlignment(SwingConstants.LEFT);
+            Hist.setFont(fonte);
+            Hist.setForeground(texto);
 
-            StringBuilder texto = new StringBuilder("<html><div style='padding:10px;'>");
+            StringBuilder textoHist = new StringBuilder("<html><div style='padding:10px;color:#E0E0E0;'>");
 
             if (historico.isEmpty()) {
-                texto.append("Nenhuma música cadastrada.");
+                textoHist.append("Nenhuma música cadastrada.");
             } else {
                 for (track t : historico) {
-                    texto.append(t.formatarEmTexto().replace("\n", "<br>"));
-                    texto.append("<br><br>");
+                    textoHist.append(t.formatarEmTexto().replace("\n", "<br>"));
+                    textoHist.append("<br><br>");
                 }
             }
-            texto.append("</div></html>");
 
-            Hist.setText(texto.toString());
+            textoHist.append("</div></html>");
+            Hist.setText(textoHist.toString());
 
             JScrollPane scroll = new JScrollPane(Hist);
+            scroll.getViewport().setBackground(fundo);
+            scroll.setBackground(fundo);
+            scroll.setBorder(null);
+
+            F_historico.getContentPane().setBackground(fundo);
             F_historico.add(scroll);
 
             F_historico.setVisible(true);
@@ -144,18 +173,16 @@ public class MainGui {
             }
 
             StringBuilder textoParaExportar = new StringBuilder();
-
             for (track t : historico) {
                 textoParaExportar.append(t.formatarEmTexto()).append("\n\n");
             }
 
             save.writeArquivo(textoParaExportar.toString());
-
             JOptionPane.showMessageDialog(null, "Lista exportada com sucesso!");
         });
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(300, 450);
+        frame.setSize(350, 480);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
